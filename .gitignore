@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+.pytest_cache/
+/.pytest_cache/
+*.pyc
+.env
+venv/
+.venv/
+/.venv/
+
+# Other
+
+# Under hwsources/resources/m3/part2
+*_detect.*
+scene_matched*
+
+# OS generated files
+.DS_Store
+.ini
