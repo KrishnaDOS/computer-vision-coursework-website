@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna's CSC 8830 Coursework</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Syntax highlighting for inline source previews -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+
+<body class="dark">
+
+    <header>
+        <h1 id="site-title" role="button" tabindex="0" onclick="switchTab('home')" onkeydown="if(event.key==='Enter'||event.key===' ') switchTab('home')">
+            <img src="{{ url_for('static', filename='favicon.ico') }}" alt="" class="site-title__icon" aria-hidden="true">
+            <span>Krishna's Computer Vision Coursework Site</span>
+        </h1>
+        <div class="header-controls">
+            <button id="global-reset-btn" class="subtle-btn" title="Reset all modules and clear results">Reset All</button>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle color theme"
+                aria-pressed="true">
+                <span id="theme-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="tabs" role="tablist" aria-label="Modules navigation">
+        <button class="tab-btn active" role="tab" aria-selected="true" tabindex="0"
+            onclick="switchTab('home')">Home</button>
+        <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" onclick="switchTab('a1')">Module
+            1</button>
+        <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" onclick="switchTab('a2')">Module
+            2</button>
+        <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" onclick="switchTab('a3')">Module
+            3</button>
+        <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" onclick="switchTab('a4')">Module
+            4</button>
+        <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" onclick="switchTab('a56')">Module 5 &
+            6</button>
+        <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" onclick="switchTab('a7')">Module
+            7</button>
+    </div>
+
+    <main>
+        <!-- HOME TAB -->
+        <div id="home" class="tab-content active">
+            <h2>CSC 8830: Computer Vision Coursework Demo Website</h2>
+            <div class="home-meta" style="display:grid; grid-template-columns: auto 1fr; gap:0.25rem 1rem; align-items:center; margin:0 0 1rem 0;">
+                <span style="font-weight:700;">Name:</span>
+                <span>Avyuktkrishna (Krishna) Ramasamy</span>
+                <span style="font-weight:700;">Instructor:</span>
+                <span>Dr. Ashwin Ashok</span>
+                <span style="font-weight:700;">Semester:</span>
+                <span>Fall 2025</span>
+                <span style="font-weight:700;">College:</span>
+                <span>Georgia State University, College of Arts &amp; Sciences - Department of Computer Science</span>
+            </div>
+            <div class="home-intro" role="region" aria-label="Introduction">
+                <p class="lead">
+                    In each module tab, you can:
+                </p>
+                <ul class="home-features" style="margin-top:0.5rem; margin-bottom:0.5rem;">
+                    <li>Test the program(s)</li>
+                    <li>Watch the tutorial video for each module</li>
+                    <li>Explore the source code</li>
+                </ul>
+                <p class="note" style="font-size:0.9rem; color:var(--muted-text);">
+                    If a section is not visible, try scrolling down and/or expand the collapsed panels <em>(they are collapsed by default)</em>.
+                </p>
+                <p>
+                    <a class="github-btn" href="https://github.com/KrishnaDOS/computer-vision-coursework-website" target="_blank" rel="noopener noreferrer" aria-label="View repository on GitHub">
+                        <!-- GitHub (Octocat) logo -->
+                        <svg class="github-btn__icon" width="18" height="18" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.588 7.588 0 012 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.13.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                        </svg>
+                        <span>View source code on GitHub</span>
+                    </a>
+                </p>
+            </div>
+
+            <div class="home-grid">
+                <div class="card" onclick="switchTab('a1')">
+                    <h3>Module 1</h3>
+                    <p>Object Dimension Calculator</p>
+                </div>
+                <div class="card" onclick="switchTab('a2')">
+                    <h3>Module 2</h3>
+                    <p>Object Detection with Correlation-Based Template Matching</p>
+                </div>
+                <div class="card" onclick="switchTab('a3')">
+                    <h3>Module 3</h3>
+                    <p>Object Boundary Detection &amp; Segmentation</p>
+                </div>
+                <div class="card" onclick="switchTab('a4')">
+                    <h3>Module 4</h3>
+                    <p>Image Stitching &amp; SIFT Feature Extraction</p>
+                </div>
+                <div class="card" onclick="switchTab('a56')">
+                    <h3>Module 5 &amp; 6</h3>
+                    <p>Real-Time Object Tracker</p>
+                </div>
+                <div class="card" onclick="switchTab('a7')">
+                    <h3>Module 7</h3>
+                    <p>Object Dimension Calculator using Calibrated Stereo;<br>Pose Estimation &amp; Hand Tracking</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 1 -->
+        <div id="a1" class="tab-content">
+            <h2>Module 1 Assignment</h2>
+            <p class="description">Object Dimension Calculator</p>
+            <section class="instructions-section" aria-labelledby="instructions-toggle-a1">
+                <button id="instructions-toggle-a1" class="instructions-toggle" aria-expanded="false" aria-controls="instructions-panel-a1">View module instructions ▾</button>
+                <div id="instructions-panel-a1" class="instructions-panel" aria-hidden="true">
+                    <div class="instructions-panel__body">
+                        <object data="{{ url_for('module_instructions', module_id='a1') }}" type="application/pdf" aria-label="Module 1 assignment instructions" class="instructions-panel__viewer">
+                            <p>Your browser cannot display PDFs inline. <a href="{{ url_for('module_instructions', module_id='a1') }}" target="_blank" rel="noopener">Download Assignment 1</a>.</p>
+                        </object>
+                    </div>
+                    <p class="instructions-panel__note">
+                        <a href="{{ url_for('module_instructions', module_id='a1') }}" target="_blank" rel="noopener">Open the Module 1 instructions in a new tab</a>
+                    </p>
+                </div>
+            </section>
+            <div class="module1-app" aria-live="polite">
+                <section class="step-card" id="module1-ref-card">
+                    <header class="step-card__header">
+                        <span class="step-pill">Step 1</span>
+                        <div>
+                            <h3>Calibrate with a reference image</h3>
+                            <p>
+                                Select two points on a known object to recover the camera's focal length.<br>
+                                <u>IMPORTANT:</u> Both the reference and test images <strong>must</strong> be captured using the same camera!!
+                            </p>
+                        </div>
+                    </header>
+                    <div class="step-card__body">
+                        <div class="step-actions">
+                            <label class="file-input">
+                                <input type="file" accept="image/*" id="ref-image-input">
+                                <span>Choose reference image</span>
+                            </label>
+                            <button type="button" class="subtle-btn" id="ref-clear-btn" disabled>Clear image</button>
+                            <button type="button" class="subtle-btn" id="module1-use-sample-btn">Use example images</button>
+                        </div>
+                        <div class="canvas-wrapper" data-state="empty">
+                            <canvas id="ref-canvas" class="measure-canvas" role="img" aria-label="Reference image canvas"></canvas>
+                            <div class="canvas-empty" id="ref-canvas-empty">Upload an image, then click two points to mark its width.</div>
+                        </div>
+                        <div class="point-controls">
+                            <div>
+                                <span class="metric-label">Pixel width</span>
+                                <span class="metric-value" id="ref-pixel-width">--</span>
+                            </div>
+                            <button type="button" class="subtle-btn" id="ref-reset-points" disabled>Reset points</button>
+                        </div>
+                        <div class="field-grid">
+                            <label class="field">
+                                <span>Real-world width (cm)</span>
+                                <input type="number" id="ref-real-width" min="0" step="0.01" placeholder="e.g. 3.5">
+                            </label>
+                            <label class="field">
+                                <span>Camera distance (cm)</span>
+                                <input type="number" id="ref-distance" min="0" step="0.1" placeholder="e.g. 25">
+                            </label>
+                        </div>
+                        <button type="button" class="primary-btn" id="ref-calc-btn" disabled>Calculate focal length</button>
+                        <div class="status-line" id="ref-status">Upload a reference image to begin calibration.</div>
+                    </div>
+                </section>
+
+                <section class="step-card locked" id="module1-test-card" aria-disabled="true">
+                    <header class="step-card__header">
+                        <span class="step-pill">Step 2</span>
+                        <div>
+                            <h3>Measure an unknown object</h3>
+                            <p>Use the stored focal length with a new image captured by the same camera.</p>
+                        </div>
+                    </header>
+                    <div class="step-card__body">
+                        <div class="step-actions">
+                            <label class="file-input">
+                                <input type="file" accept="image/*" id="test-image-input" disabled>
+                                <span>Choose test image</span>
+                            </label>
+                            <button type="button" class="subtle-btn" id="test-clear-btn" disabled>Clear image</button>
+                        </div>
+                        <div class="canvas-wrapper" data-state="empty">
+                            <canvas id="test-canvas" class="measure-canvas" role="img" aria-label="Test image canvas"></canvas>
+                            <div class="canvas-empty" id="test-canvas-empty">Upload a test image to measure another object.</div>
+                        </div>
+                        <div class="point-controls">
+                            <div>
+                                <span class="metric-label">Pixel width</span>
+                                <span class="metric-value" id="test-pixel-width">--</span>
+                            </div>
+                            <button type="button" class="subtle-btn" id="test-reset-points" disabled>Reset points</button>
+                        </div>
+                        <div class="field-grid single">
+                            <label class="field">
+                                <span>Camera distance (cm)</span>
+                                <input type="number" id="test-distance" min="0" step="0.1" placeholder="e.g. 40" disabled>
+                            </label>
+                            <div id="test-expected-width" class="hint" style="margin-top:0.4rem;">Expected width: <span id="test-expected-value">--</span> cm</div>
+                        </div>
+                        <button type="button" class="primary-btn" id="test-calc-btn" disabled>Calculate real-world width</button>
+                        <div class="status-line" id="test-status">Complete Step 1 to unlock measurement.</div>
+                    </div>
+                </section>
+
+                <section class="step-card" id="module1-summary-card">
+                    <header class="step-card__header">
+                        <span class="step-pill">Step 3</span>
+                        <div>
+                            <h3>Results</h3>
+                            <p>Interpretable metrics from the two-step workflow will appear below.</p>
+                        </div>
+                    </header>
+                    <div class="summary-grid">
+                        <div>
+                            <span class="metric-label">Reference pixel width</span>
+                            <span class="metric-value" id="summary-ref-px">--</span>
+                        </div>
+                        <div>
+                            <span class="metric-label">Reference distance (cm)</span>
+                            <span class="metric-value" id="summary-ref-dist">--</span>
+                        </div>
+                        <div>
+                            <span class="metric-label">Test distance (cm)</span>
+                            <span class="metric-value" id="summary-test-dist">--</span>
+                        </div>
+                        <div>
+                            <span class="metric-label">Test pixel width</span>
+                            <span class="metric-value" id="summary-test-px">--</span>
+                        </div>
+                        <div>
+                            <span class="metric-label">
+                                Focal length (px)
+                                <small style="font-size:0.75em; color:inherit; font-weight:400; margin-left:0.25rem;">
+                                    (derived from Reference Image)
+                                </small>
+                            </span>
+                            <span class="metric-value" id="summary-focal">--</span>
+                        </div>
+                        <div>
+                            <span class="metric-label">Calculated <strong>Test</strong> Object real width (cm)</span>
+                            <span class="metric-value" id="summary-real-width">--</span>
+                        </div>
+                    </div>
+                    <div class="result-banner" id="module1-result-banner">Run the steps to see the measurement summary.</div>
+                    <button type="button" class="subtle-btn" id="module1-reset">Start over</button>
+                </section>
+            </div>
+            <!-- Watch the video (collapsed by default) -->
+            <section class="video-section" aria-labelledby="video-toggle-a1">
+                <button id="video-toggle-a1" class="video-toggle" aria-expanded="false" aria-controls="video-panel-a1">Watch the video ▾</button>
+                <div id="video-panel-a1" class="video-panel">
+                        <div class="video-container" id="video-container-a1">
+                            <!-- Embedded Google Drive video for Module 1 -->
+                            <iframe title="Module 1 Tutorial Video" 
+                                    src="https://drive.google.com/file/d/1TPBhM5pALlh_WDnrlmAJdtPvMdt14qQh/preview" 
+                                    allow="autoplay; encrypted-media; fullscreen"
+                                    allowfullscreen
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer"
+                                
+                                    style="border:0; width:100%; aspect-ratio:16/9;">
+                            </iframe>
+                        </div>
+                        <p class="video-fallback">If the embedded player does not load, <a href="https://drive.google.com/file/d/1TPBhM5pALlh_WDnrlmAJdtPvMdt14qQh/view?usp=sharing" target="_blank" rel="noopener noreferrer">open the video on Google Drive</a>.</p>
+                </div>
+            </section>
+            <!-- Source code explorer (collapsed by default) -->
+            <section class="source-section" aria-labelledby="source-toggle-a1">
+                <button id="source-toggle-a1" class="source-toggle" aria-expanded="false" aria-controls="source-panel-a1">View CLI source code ▾</button>
+                <div id="source-panel-a1" class="source-panel">
+                    <div class="source-files" role="list">
+                        <button class="source-file" role="listitem" data-module="a1" data-filename="module1.py" data-source-path="module1.py">module1.py</button>
+                    </div>
+                    <div class="source-toolbar" aria-hidden="true" hidden>
+                        <a class="source-button view-raw-btn" title="Open raw source in a new tab" target="_blank" rel="noopener noreferrer" aria-disabled="true">View raw</a>
+                        <a class="source-button download-btn" title="Download source file" rel="noopener" aria-disabled="true" download>Download</a>
+                    </div>
+                    <pre class="source-code" id="source-code-a1"><code></code></pre>
+                </div>
+            </section>
+        </div>
+
+        <!-- MODULE 2 -->
+        <div id="a2" class="tab-content">
+            <h2>Module 2 Assignment</h2>
+            <p class="description">Object Detection with Correlation-Based Template Matching</p>
+            <section class="instructions-section" aria-labelledby="instructions-toggle-a2">
+                <button id="instructions-toggle-a2" class="instructions-toggle" aria-expanded="false" aria-controls="instructions-panel-a2">View module instructions ▾</button>
+                <div id="instructions-panel-a2" class="instructions-panel" aria-hidden="true">
+                    <div class="instructions-panel__body">
+                        <object data="{{ url_for('module_instructions', module_id='a2') }}" type="application/pdf" aria-label="Module 2 assignment instructions" class="instructions-panel__viewer">
+                            <p>Your browser cannot display PDFs inline. <a href="{{ url_for('module_instructions', module_id='a2') }}" target="_blank" rel="noopener">Download Assignment 2</a>.</p>
+                        </object>
+                    </div>
+                    <p class="instructions-panel__note">
+                        <a href="{{ url_for('module_instructions', module_id='a2') }}" target="_blank" rel="noopener">Open the Module 2 instructions in a new tab</a>
+                    </p>
+                </div>
+            </section>
+
+            <section class="module2-card" id="module2-part1" aria-labelledby="module2-part1-title">
+                <header class="module2-card__header">
+                    <div>
+                        <h3 id="module2-part1-title">Part 1 - Template Matching</h3>
+                        <p>Run the correlation test with a set scene and template object images. No uploads needed, you can just set the threshold &amp; run.</p>
+                    </div>
+                </header>
+                <div class="module2-card__body">
+                    <div class="module2-part1-grid">
+                        <form id="module2-part1-form" class="module2-part1-form" aria-label="Module 2 Part 1 form">
+                            <div class="field">
+                                <label for="module2-part1-threshold">Detection threshold (0.0 - 1.0)</label>
+                                <input type="number" id="module2-part1-threshold" name="threshold" min="0" max="1" step="0.01" value="0.80" required>
+                                <p class="hint">Higher values demand stronger correlation. We use 0.80 as the default but feel free to change it.<br>Please note that the match finding process might take a moment - please be patient!</p>
+                            </div>
+                            <div class="module2-actions">
+                                <button type="submit" class="primary-btn" id="module2-part1-run-btn">Test Correlation</button>
+                                <button type="button" class="subtle-btn" id="module2-part1-clear-btn" disabled>Clear results</button>
+                            </div>
+                            <div class="status-line" id="module2-part1-status" data-variant="info">Load the Module 2 tab to view the reference scene, then run the detector.</div>
+                            <div class="module2-part1-summary" id="module2-part1-summary" aria-live="polite">
+                                <span>Matches detected: <strong id="module2-part1-match-count">0</strong>/<span id="module2-part1-total">0</span></span>
+                            </div>
+                        </form>
+                        <div class="module2-part1-visuals">
+                            <div class="result-frame">
+                                <h4>Reference Scene</h4>
+                                <div class="result-image" data-empty="true">
+                                    <img id="module2-part1-scene" alt="Scene used for matching" hidden>
+                                    <p id="module2-part1-scene-placeholder">Scene preview loading…</p>
+                                </div>
+                            </div>
+                            <div class="result-frame">
+                                <h4>Generated Match Files</h4>
+                                <div class="match-gallery" id="module2-part1-gallery" data-empty="true">
+                                    <p id="module2-part1-gallery-placeholder">Run the test to see each template outcome.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="module2-card" id="module2-part2" aria-labelledby="module2-part2-title">
+                <header class="module2-card__header">
+                    <div>
+                        <h3 id="module2-part2-title">Part 2 - Gaussian Blur &amp; Fourier Inverse Filtering</h3>
+                        <p>Upload an image that blurs the frame and restores it via inverse filtering.</p>
+                    </div>
+                </header>
+                <div class="module2-card__body module2-grid">
+                    <form id="module2-part2-form" aria-label="Module 2 Part 2 form" enctype="multipart/form-data">
+                        <div class="field">
+                            <label class="file-input">
+                                <input type="file" id="module2-image-input" accept="image/*">
+                                <span>Select an input image</span>
+                            </label>
+                            <div style="display:flex; gap:0.5rem; align-items:center; margin-top:0.25rem;">
+                                <input type="checkbox" id="module2-use-sample"> 
+                                <label for="module2-use-sample" style="margin-bottom:0;">Use example image (tree.jpg)</label>
+                            </div>
+                        </div>
+                        <p class="hint">Supported formats: JPG, PNG, BMP, TIFF. Auto scales the blur kernel (~3% of the shorter image side) &amp; sigma.</p>
+                        <div class="module2-actions">
+                            <button type="submit" class="primary-btn" id="module2-run-btn" disabled>Run process</button>
+                            <button type="button" class="subtle-btn" id="module2-reset-btn" disabled>Reset</button>
+                        </div>
+                        <div class="status-line" id="module2-part2-status" data-variant="info">Choose an image to get started.</div>
+                    </form>
+                    <div class="module2-results" aria-live="polite">
+                        <div class="result-frame">
+                            <h4>Original Input</h4>
+                            <div class="result-image" data-empty="true">
+                                <img id="module2-original-preview" alt="Original input preview" hidden>
+                                <p id="module2-original-placeholder">No image selected.</p>
+                            </div>
+                        </div>
+                        <div class="result-frame">
+                            <h4>Blurred Output</h4>
+                            <div class="result-image" data-empty="true">
+                                <img id="module2-blurred-preview" alt="Blurred output preview" hidden>
+                                <p id="module2-blurred-placeholder">No output yet.</p>
+                            </div>
+                        </div>
+                        <div class="result-frame">
+                            <h4>Inverse Filtered Output</h4>
+                            <div class="result-image" data-empty="true">
+                                <img id="module2-restored-preview" alt="Restored output preview" hidden>
+                                <p id="module2-restored-placeholder">No output yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="module2-card" id="module2-part3" aria-labelledby="module2-part3-title">
+                <header class="module2-card__header">
+                    <div>
+                        <h3 id="module2-part3-title">Part 3 - Multi-Template Detection &amp; Selective Blur</h3>
+                        <p>Detect all templates inside the fixed scene, then obscure those regions with adjustable blur.</p>
+                    </div>
+                </header>
+                <div class="module2-card__body module2-part3-body">
+                    <div class="module2-part3-grid">
+                        <form id="module2-part3-form" class="module2-part3-form" aria-label="Module 2 Part 3 form">
+                            <div class="field">
+                                <label for="module2-part3-threshold">Detection threshold (0.0 - 1.0)</label>
+                                <input type="number" id="module2-part3-threshold" name="threshold" min="0" max="1" step="0.01" value="0.75" required>
+                                <p class="hint">Adjust the sensitivity of template matching. Higher values reduce false positives but may miss faint matches.</p>
+                            </div>
+                            <div class="field">
+                                <label for="module2-part3-blur">Blur multiplier (0.1 - 25)</label>
+                                <input type="number" id="module2-part3-blur" name="blurMultiplier" min="0.1" max="25" step="0.1" value="2.5" required>
+                                <p class="hint">The multiplier scales both the Gaussian kernel size and sigma before obscuring each detection.</p>
+                            </div>
+                            <div class="module2-actions">
+                                <button type="submit" class="primary-btn" id="module2-part3-run-btn">Run detection</button>
+                                <button type="button" class="subtle-btn" id="module2-part3-reset-btn" disabled>Reset outputs</button>
+                            </div>
+                            <div class="status-line" id="module2-part3-status" data-variant="info">Reference assets will load automatically — adjust the parameters and run whenever you are ready.</div>
+                            <div class="module2-part3-summary" aria-live="polite">
+                                <div>
+                                    <span class="metric-label">Detections found</span>
+                                    <span class="metric-value" id="module2-part3-detection-count">0</span>
+                                </div>
+                                <div>
+                                    <span class="metric-label">Templates tested</span>
+                                    <span class="metric-value" id="module2-part3-template-count">0</span>
+                                </div>
+                            </div>
+                            <div class="module2-part3-log" id="module2-part3-detection-log" data-empty="true">Run the detector to list every match, including its template label and correlation score.</div>
+                        </form>
+                        <div class="module2-part3-visuals" aria-live="polite">
+                            <div class="result-frame">
+                                <h4>Reference Scene</h4>
+                                <div class="result-image" data-empty="true">
+                                    <img id="module2-part3-scene" alt="Scene used for Module 2 Part 3" hidden>
+                                    <p id="module2-part3-scene-placeholder">Scene preview loading…</p>
+                                </div>
+                            </div>
+                            <div class="result-frame">
+                                <h4>Detections Overlay</h4>
+                                <div class="result-image" data-empty="true">
+                                    <img id="module2-part3-detections" alt="Boxes drawn over detected templates" hidden>
+                                    <p id="module2-part3-detections-placeholder">Run detection to see annotated matches.</p>
+                                </div>
+                            </div>
+                            <div class="result-frame">
+                                <h4>Blurred Regions</h4>
+                                <div class="result-image" data-empty="true">
+                                    <img id="module2-part3-blurred" alt="Scene with blurred detections" hidden>
+                                    <p id="module2-part3-blurred-placeholder">Run detection to generate the blurred output.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="module2-part3-templates" aria-live="polite">
+                        <div class="module2-part3-templates__header">
+                            <h4>Templates in this experiment</h4>
+                            <p class="hint">Loaded directly from <code>resources/m2/template_*.png</code>.</p>
+                        </div>
+                        <div id="module2-part3-templates-grid" class="template-grid" data-empty="true">
+                            <p id="module2-part3-templates-placeholder">Fetching template thumbnails…</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Watch the video (collapsed by default) -->
+            <section class="video-section" aria-labelledby="video-toggle-a2">
+                <button id="video-toggle-a2" class="video-toggle" aria-expanded="false" aria-controls="video-panel-a2">Watch the video ▾</button>
+                <div id="video-panel-a2" class="video-panel">
+                    <div class="video-container" id="video-container-a2">
+                        <!-- Embedded Google Drive video for Module 2 -->
+                        <iframe title="Module 2 Tutorial Video"
+                                src="https://drive.google.com/file/d/1ynv1eZZlDx0tkZcwGqo41D9ry9rnUytJ/preview"
+                                allow="autoplay; encrypted-media; fullscreen"
+                                allowfullscreen
+                                loading="lazy"
+                                referrerpolicy="no-referrer"
+                                style="border:0; width:100%; aspect-ratio:16/9;">
+                        </iframe>
+                    </div>
+                    <p class="video-fallback">If the embedded player does not load, <a href="https://drive.google.com/file/d/1ynv1eZZlDx0tkZcwGqo41D9ry9rnUytJ/view?usp=sharing" target="_blank" rel="noopener noreferrer">open the video on Google Drive</a>.</p>
+                </div>
+            </section>
+            <!-- Source code explorer (collapsed by default) -->
+            <section class="source-section" aria-labelledby="source-toggle-a2">
+                <button id="source-toggle-a2" class="source-toggle" aria-expanded="false" aria-controls="source-panel-a2">View CLI source code ▾</button>
+                <div id="source-panel-a2" class="source-panel">
+                    <div class="source-files" role="list">
+                        <button class="source-file" role="listitem" data-module="a2" data-filename="module2_part1.py" data-source-path="module2_part1.py">module2_part1.py</button>
+                        <button class="source-file" role="listitem" data-module="a2" data-filename="module2_part2.py" data-source-path="module2_part2.py">module2_part2.py</button>
+                        <button class="source-file" role="listitem" data-module="a2" data-filename="module2_part3.py" data-source-path="module2_part3.py">module2_part3.py</button>
+                    </div>
+                    <div class="source-toolbar" aria-hidden="true" hidden>
+                        <a class="source-button view-raw-btn" target="_blank" rel="noopener noreferrer" aria-disabled="true">View raw</a>
+                        <a class="source-button download-btn" rel="noopener" aria-disabled="true" download>Download</a>
+                    </div>
+                    <pre class="source-code" id="source-code-a2"><code></code></pre>
+                </div>
+            </section>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div id="a3" class="tab-content">
+            <h2>Module 3 Assignment</h2>
+            <p class="description">Object Boundary Detection &amp; Segmentation</p>
+            <section class="instructions-section" aria-labelledby="instructions-toggle-a3">
+                <button id="instructions-toggle-a3" class="instructions-toggle" aria-expanded="false" aria-controls="instructions-panel-a3">View module instructions ▾</button>
+                <div id="instructions-panel-a3" class="instructions-panel" aria-hidden="true">
+                    <div class="instructions-panel__body">
+                        <object data="{{ url_for('module_instructions', module_id='a3') }}" type="application/pdf" aria-label="Module 3 assignment instructions" class="instructions-panel__viewer">
+                            <p>Your browser cannot display PDFs inline. <a href="{{ url_for('module_instructions', module_id='a3') }}" target="_blank" rel="noopener">Download Assignment 3</a>.</p>
+                        </object>
+                    </div>
+                    <p class="instructions-panel__note">
+                        <a href="{{ url_for('module_instructions', module_id='a3') }}" target="_blank" rel="noopener">Open the Module 3 instructions in a new tab</a>
+                    </p>
+                </div>
+            </section>
+            <div class="module3-cards">
+                <section class="module3-card" id="module3-part1" aria-labelledby="module3-part1-title">
+                    <header class="module3-card__header">
+                        <div>
+                            <h3 id="module3-part1-title">Part 1 - Gradients &amp; Laplacian of Gaussian</h3>
+                            <p>See each photo alongside its gradient magnitude, direction, and LoG view.</p>
+                        </div>
+                    </header>
+                    <div class="module3-card__body module3-grid">
+                        <form id="module3-part1-form" aria-label="Module 3 Part 1 form" enctype="multipart/form-data">
+                            <div class="field">
+                                <label class="file-input module3-file-picker">
+                                    <input type="file" id="module3-part1-input" name="images" accept="image/*" multiple>
+                                    <span>Select at least 10 images</span>
+                                </label>
+                                <p class="hint">Upload 10+ photos and we’ll build the 2×2 gradient grid for every image automatically.</p>
+                                <div class="module3-sample-actions">
+                                    <button type="button" class="subtle-btn module3-sample-btn" id="module3-part1-sample">Use example dataset</button>
+                                    <span class="module3-sample-note">Loads <code>resources/m3</code> (10 bundled frames).</span>
+                                </div>
+                            </div>
+                            <div class="module3-selection" id="module3-part1-selection" data-empty="true">
+                                <p>No dataset selected yet.</p>
+                            </div>
+                            <div class="module3-actions">
+                                <button type="submit" class="primary-btn" id="module3-part1-run" disabled>Run Task 1</button>
+                                <button type="button" class="subtle-btn" id="module3-part1-reset" disabled>Reset</button>
+                            </div>
+                            <div class="status-line" id="module3-part1-status" data-variant="info">Upload ≥10 images or click “Use example dataset” to enable processing.</div>
+                        </form>
+                        <div class="module3-results" aria-live="polite">
+                            <div class="module3-summary" id="module3-part1-summary">Results pair the original photo with a single card that contains the full gradient grid.</div>
+                            <div class="module3-gallery" id="module3-part1-gallery" data-empty="true">
+                                <p class="module3-gallery__placeholder">Run Task 1 to generate the composite grid for every image.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="module3-card" id="module3-part2" aria-labelledby="module3-part2-title">
+                    <header class="module3-card__header">
+                        <div>
+                            <h3 id="module3-part2-title">Part 2 - Edge &amp; Corner Detection</h3>
+                            <p>Highlight sharp edges in green and likely corners in red using vanilla Sobel math.</p>
+                        </div>
+                    </header>
+                    <div class="module3-card__body module3-grid">
+                        <form id="module3-part2-form" aria-label="Module 3 Part 2 form" enctype="multipart/form-data">
+                            <div class="field">
+                                <label class="file-input module3-file-picker">
+                                    <input type="file" id="module3-part2-input" name="images" accept="image/*" multiple>
+                                    <span>Select at least 10 images</span>
+                                </label>
+                                <p class="hint">No ML involved - just gradients and thresholds to color the important edges and corners.</p>
+                                <div class="module3-sample-actions">
+                                    <button type="button" class="subtle-btn module3-sample-btn" id="module3-part2-sample">Use example dataset</button>
+                                    <span class="module3-sample-note">Instantly queues the bundled Module 3 set.</span>
+                                </div>
+                            </div>
+                            <div class="module3-selection" id="module3-part2-selection" data-empty="true">
+                                <p>No dataset selected yet.</p>
+                            </div>
+                            <div class="module3-actions">
+                                <button type="submit" class="primary-btn" id="module3-part2-run" disabled>Run Task 2</button>
+                                <button type="button" class="subtle-btn" id="module3-part2-reset" disabled>Reset</button>
+                            </div>
+                            <div class="status-line" id="module3-part2-status" data-variant="info">Upload ≥10 images or use the example dataset to analyze edges/corners.</div>
+                        </form>
+                        <div class="module3-results" aria-live="polite">
+                            <div class="module3-summary" id="module3-part2-summary">Each gallery entry simply overlays the photo with green edges and red corner markers.</div>
+                            <div class="module3-gallery" id="module3-part2-gallery" data-empty="true">
+                                <p class="module3-gallery__placeholder">Run Task 2 to visualize the detected keypoints.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="module3-card" id="module3-part3" aria-labelledby="module3-part3-title">
+                    <header class="module3-card__header">
+                        <div>
+                            <h3 id="module3-part3-title">Part 3 - Exact Boundary Detection</h3>
+                            <p>Find the main object in every picture and trace its outline in green.</p>
+                        </div>
+                    </header>
+                    <div class="module3-card__body module3-grid">
+                        <form id="module3-part3-form" aria-label="Module 3 Part 3 form" enctype="multipart/form-data">
+                            <div class="field">
+                                <label class="file-input module3-file-picker">
+                                    <input type="file" id="module3-part3-input" name="images" accept="image/*" multiple>
+                                    <span>Select at least 10 images</span>
+                                </label>
+                                <p class="hint">We smooth the photo, keep the cleanest big blob, and draw the contour—no knobs to tweak.</p>
+                                <div class="module3-sample-actions">
+                                    <button type="button" class="subtle-btn module3-sample-btn" id="module3-part3-sample">Use example dataset</button>
+                                    <span class="module3-sample-note">Loads the bundled Module 3 image stack.</span>
+                                </div>
+                            </div>
+                            <div class="module3-selection" id="module3-part3-selection" data-empty="true">
+                                <p>No dataset selected yet.</p>
+                            </div>
+                            <div class="module3-actions">
+                                <button type="submit" class="primary-btn" id="module3-part3-run" disabled>Run Task 3</button>
+                                <button type="button" class="subtle-btn" id="module3-part3-reset" disabled>Reset</button>
+                            </div>
+                            <div class="status-line" id="module3-part3-status" data-variant="info">Upload ≥10 images or use the bundled set to run boundary detection.</div>
+                        </form>
+                        <div class="module3-results" aria-live="polite">
+                            <div class="module3-summary" id="module3-part3-summary">Outputs show the dominant object outlined in green for quick scanning.</div>
+                            <div class="module3-gallery" id="module3-part3-gallery" data-empty="true">
+                                <p class="module3-gallery__placeholder">Run Task 3 to render the boundary overlays.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="module3-card" id="module3-part4" aria-labelledby="module3-part4-title">
+                    <header class="module3-card__header">
+                        <div>
+                            <h3 id="module3-part4-title">Part 4 - Marker-Guided GrabCut</h3>
+                            <p>Use ArUco markers to pin the object's outline and carve it out with GrabCut.</p>
+                        </div>
+                    </header>
+                    <div class="module3-card__body module3-grid">
+                        <form id="module3-part4-form" aria-label="Module 3 Part 4 form" enctype="multipart/form-data">
+                            <div class="field">
+                                <label class="file-input module3-file-picker">
+                                    <input type="file" id="module3-part4-input" name="images" accept="image/*" multiple>
+                                    <span>Select at least 10 images</span>
+                                </label>
+                                <p class="hint">Each upload must show the object with ArUco markers taped around it so the boundary can lock on.</p>
+                                <div class="module3-sample-actions">
+                                    <button type="button" class="subtle-btn module3-sample-btn" id="module3-part4-sample">Use example dataset</button>
+                                    <span class="module3-sample-note">Loads resources/m3/part2 (ignores *_detect* files).</span>
+                                </div>
+                            </div>
+                            <div class="module3-selection" id="module3-part4-selection" data-empty="true">
+                                <p>No dataset selected yet.</p>
+                            </div>
+                            <div class="module3-actions">
+                                <button type="submit" class="primary-btn" id="module3-part4-run" disabled>Run Task 4</button>
+                                <button type="button" class="subtle-btn" id="module3-part4-reset" disabled>Reset</button>
+                            </div>
+                            <div class="status-line" id="module3-part4-status" data-variant="info">Upload ≥10 images or click "Use example dataset" to enable the cutout.</div>
+                        </form>
+                        <div class="module3-results" aria-live="polite">
+                            <div class="module3-summary" id="module3-part4-summary">Outputs pair the original frame with a marker-guided cutout.</div>
+                            <div class="module3-gallery module3-gallery--interactive" id="module3-part4-gallery" data-empty="true">
+                                <p class="module3-gallery__placeholder">Run Task 4 to see the segmented overlays.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="module3-card" id="module3-part5" aria-labelledby="module3-part5-title">
+                    <header class="module3-card__header">
+                        <div>
+                            <h3 id="module3-part5-title">Part 5 - SAM2 vs ArUco Showcase</h3>
+                            <p>Browse precomputed comparisons between the ArUco GrabCut baseline and the SAM2.1 Hiera Large model.</p>
+                        </div>
+                    </header>
+                    <div class="module3-card__body module3-showcase">
+                        <div class="module3-showcase__intro">
+                            <p>
+                                This section is static on purpose: SAM2 needs a hefty GPU and custom install, so these frames were generated ahead of time
+                                with <strong>sam2.1_hiera_large</strong> running on an <strong>RTX 4090</strong>. Each gallery item shows the original ArUco scene next to
+                                the SAM2 segmentation that outlines the same object boundary.
+                            </p>
+                            <p>
+                                Want to experiment yourself? Expand the <em>“View CLI source code”</em> dropdown just below this tab, download <code>module3_part3.py</code>,
+                                and run it locally with your own images via the CLI pipeline.
+                            </p>
+                            <div class="module3-showcase__cta">
+                                <button type="button" class="primary-btn" id="module3-part5-refresh">Refresh gallery</button>
+                                <a class="subtle-btn" id="module3-part5-download" href="/api/a3/part5/raw-download" download>
+                                    Download raw dataset (ZIP)
+                                </a>
+                            </div>
+                            <div class="module3-cli-callout" aria-live="polite">
+                                <h4>Run the CLI locally</h4>
+                                <p>Install the extra dependencies and plug in your own folder plus SAM2 weights.</p>
+                                <div class="module3-cli-grid">
+                                    <div>
+                                        <p class="module3-cli-label">Install dependencies</p>
+                                        <div class="module3-cli-snippet">
+                                            <pre><code id="module3-part5-deps">pip install torch sam2 hydra-core omegaconf opencv-python numpy</code></pre>
+                                            <button type="button" class="module3-copy-btn" data-copy-target="module3-part5-deps" aria-label="Copy install command">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-1v2a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3h1V7a3 3 0 0 1 3-3h0Zm-3 5H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H5Zm5-5a1 1 0 0 0-1 1v2h5a3 3 0 0 1 3 3v3h2a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-8Z"/></svg>
+                                            </button>
+                                            <span class="module3-copy-toast" role="status" aria-live="polite">Copied!</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="module3-cli-label">Sample command</p>
+                                        <div class="module3-cli-snippet">
+                                            <pre><code id="module3-part5-command">python module3_part3.py &lt;path/to/image-folder&gt; --model-config &lt;path/to/sam2.1_hiera_l.yaml&gt; --checkpoint &lt;path/to/sam2.1_hiera_large.pt&gt; --device [auto|cuda|mps|cpu] --verbose</code></pre>
+                                            <button type="button" class="module3-copy-btn" data-copy-target="module3-part5-command" aria-label="Copy CLI command">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-1v2a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3h1V7a3 3 0 0 1 3-3h0Zm-3 5H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H5Zm5-5a1 1 0 0 0-1 1v2h5a3 3 0 0 1 3 3v3h2a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-8Z"/></svg>
+                                            </button>
+                                            <span class="module3-copy-toast" role="status" aria-live="polite">Copied!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="hint">Use the same CLI dropdown to grab the script, then point the command to your own folders/checkpoints as needed.</p>
+                            </div>
+                        </div>
+                        <div class="module3-showcase__results" aria-live="polite">
+                            <div class="module3-summary" id="module3-part5-summary">Offline comparisons load automatically once Module 3 is in view.</div>
+                            <div class="module3-gallery module3-gallery--showcase module3-gallery--interactive" id="module3-part5-gallery" data-empty="true">
+                                <p class="module3-gallery__placeholder">Hang tight — fetching the SAM2 results…</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- Watch the video (collapsed by default) -->
+            <section class="video-section" aria-labelledby="video-toggle-a3">
+                <button id="video-toggle-a3" class="video-toggle" aria-expanded="false" aria-controls="video-panel-a3">Watch the video ▾</button>
+                <div id="video-panel-a3" class="video-panel">
+                    <div class="video-container" id="video-container-a3">
+                        <!-- Embedded Google Drive video for Module 3 -->
+                        <iframe title="Module 3 Tutorial Video"
+                                src="https://drive.google.com/file/d/1VreI4be7dnU9C12KLGVXoGq7TNeuU19c/preview"
+                                allow="autoplay; encrypted-media; fullscreen"
+                                allowfullscreen
+                                loading="lazy"
+                                referrerpolicy="no-referrer"
+                                style="border:0; width:100%; aspect-ratio:16/9;">
+                        </iframe>
+                    </div>
+                    <p class="video-fallback">If the embedded player does not load, <a href="https://drive.google.com/file/d/1VreI4be7dnU9C12KLGVXoGq7TNeuU19c/view?usp=sharing" target="_blank" rel="noopener noreferrer">open the video on Google Drive</a>.</p>
+                </div>
+            </section>
+            <!-- Source code explorer (collapsed by default) -->
+            <section class="source-section" aria-labelledby="source-toggle-a3">
+                <button id="source-toggle-a3" class="source-toggle" aria-expanded="false" aria-controls="source-panel-a3">View CLI source code ▾</button>
+                <div id="source-panel-a3" class="source-panel">
+                    <div class="source-files" role="list">
+                        <button class="source-file" role="listitem" data-module="a3" data-filename="module3_part1.py" data-source-path="module3_part1.py">module3_part1.py</button>
+                        <button class="source-file" role="listitem" data-module="a3" data-filename="module3_part2.py" data-source-path="module3_part2.py">module3_part2.py</button>
+                        <button class="source-file" role="listitem" data-module="a3" data-filename="module3_part3.py" data-source-path="module3_part3.py">module3_part3.py</button>
+                    </div>
+                    <div class="source-toolbar" aria-hidden="true" hidden>
+                        <a class="source-button view-raw-btn" target="_blank" rel="noopener noreferrer" aria-disabled="true">View raw</a>
+                        <a class="source-button download-btn" rel="noopener" aria-disabled="true" download>Download</a>
+                    </div>
+                    <pre class="source-code" id="source-code-a3"><code></code></pre>
+                </div>
+            </section>
+        </div>
+
+        <!-- MODULE 4 -->
+        <div id="a4" class="tab-content">
+            <h2>Module 4 Assignment</h2>
+            <p class="description">Image Stitching &amp; SIFT Feature Extraction</p>
+            <section class="instructions-section" aria-labelledby="instructions-toggle-a4">
+                <button id="instructions-toggle-a4" class="instructions-toggle" aria-expanded="false" aria-controls="instructions-panel-a4">View module instructions ▾</button>
+                <div id="instructions-panel-a4" class="instructions-panel" aria-hidden="true">
+                    <div class="instructions-panel__body">
+                        <object data="{{ url_for('module_instructions', module_id='a4') }}" type="application/pdf" aria-label="Module 4 assignment instructions" class="instructions-panel__viewer">
+                            <p>Your browser cannot display PDFs inline. <a href="{{ url_for('module_instructions', module_id='a4') }}" target="_blank" rel="noopener">Download Assignment 4</a>.</p>
+                        </object>
+                    </div>
+                    <p class="instructions-panel__note">
+                        <a href="{{ url_for('module_instructions', module_id='a4') }}" target="_blank" rel="noopener">Open the Module 4 instructions in a new tab</a>
+                    </p>
+                </div>
+            </section>
+            <p class="module4-intro">Both parts below expect the <strong>same portrait image set (8+ photos)</strong>. Use Part 1 to see the OpenCV reference implementation and Part 2 to compare it against the scratch-built SIFT + RANSAC pipeline.</p>
+
+            <section class="module4-card" id="module4-part1" aria-labelledby="module4-part1-title">
+                <header class="module4-card__header">
+                    <div>
+                        <h3 id="module4-part1-title">Part 1 &ndash; OpenCV SIFT Panorama</h3>
+                        <p>Leans on OpenCV for SIFT features, brute-force matching, and affine blending.</p>
+                    </div>
+                    <span class="module4-pill" data-variant="opencv">OpenCV pipeline</span>
+                </header>
+                <div class="module4-card__body module4-grid">
+                    <form id="module4-part1-form" class="module4-form" aria-label="Module 4 Part 1 form" enctype="multipart/form-data">
+                        <div class="field">
+                            <label class="file-input module4-file-picker">
+                                <input type="file" id="module4-part1-input" name="images" accept="image/*" multiple>
+                                <span>Select portrait images</span>
+                            </label>
+                            <p class="hint">Upload <strong>at least 8</strong> portrait images (height &gt; width) captured left-to-right. More frames are welcome.</p>
+                            <div class="module4-sample-actions">
+                                <button type="button" class="subtle-btn module4-sample-btn" id="module4-part1-sample">Load example data</button>
+                                <span class="module4-sample-note">Uses resources/m4 images bundled with the project.</span>
+                            </div>
+                            <div class="module4-alert" role="note">
+                                Portrait is mandatory. Landscape frames will be rejected to protect the pipeline from bowtie distortion.
+                            </div>
+                        </div>
+                        <div class="module4-selection" id="module4-part1-selection" data-empty="true">
+                            <p>No images selected yet.</p>
+                        </div>
+                        <div class="module4-actions">
+                            <button type="submit" class="primary-btn" id="module4-part1-run" disabled>Stitch with OpenCV</button>
+                            <button type="button" class="subtle-btn" id="module4-part1-reset" disabled>Reset inputs</button>
+                        </div>
+                        <div class="status-line" id="module4-part1-status" data-variant="info">Upload 8+ portrait frames to enable stitching.</div>
+                    </form>
+                    <div class="module4-results">
+                        <div class="result-frame">
+                            <h4>Panorama Preview</h4>
+                            <div class="result-image" data-empty="true">
+                                <img id="module4-part1-output" alt="Module 4 Part 1 panorama preview" hidden>
+                                <p id="module4-part1-placeholder">No panorama generated yet.</p>
+                            </div>
+                            <dl class="module4-meta">
+                                <div>
+                                    <dt>Input count</dt>
+                                    <dd id="module4-part1-count">0</dd>
+                                </div>
+                                <div>
+                                    <dt>Output size</dt>
+                                    <dd id="module4-part1-size">-- × --</dd>
+                                </div>
+                            </dl>
+                            <button type="button" class="subtle-btn module4-download-btn" id="module4-part1-download" hidden>Download panorama</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="module4-card" id="module4-part2" aria-labelledby="module4-part2-title">
+                <header class="module4-card__header">
+                    <div>
+                        <h3 id="module4-part2-title">Part 2 &ndash; Scratch SIFT + Affine RANSAC</h3>
+                        <p>Executes the fully manual implementation of SIFT, custom descriptors, and affine RANSAC blending.</p>
+                    </div>
+                    <span class="module4-pill" data-variant="scratch">Manual pipeline</span>
+                </header>
+                <div class="module4-card__body module4-grid">
+                    <form id="module4-part2-form" class="module4-form" aria-label="Module 4 Part 2 form" enctype="multipart/form-data">
+                        <div class="field">
+                            <label class="file-input module4-file-picker">
+                                <input type="file" id="module4-part2-input" name="images" accept="image/*" multiple>
+                                <span>Select portrait images</span>
+                            </label>
+                            <p class="hint">Use the same 8+ portrait stack to compare results with the handcrafted pipeline.</p>
+                            <div class="module4-sample-actions">
+                                <button type="button" class="subtle-btn module4-sample-btn" id="module4-part2-sample">Load example data</button>
+                                <span class="module4-sample-note">Quickly runs the scratch code against the resources/m4 stack.</span>
+                            </div>
+                            <div class="module4-alert" role="note">
+                                The scratch SIFT code is sensitive to ordering and orientation. Keep the portrait constraint enforced above.
+                            </div>
+                        </div>
+                        <div class="module4-selection" id="module4-part2-selection" data-empty="true">
+                            <p>No images selected yet.</p>
+                        </div>
+                        <div class="module4-actions">
+                            <button type="submit" class="primary-btn" id="module4-part2-run" disabled>Stitch with Scratch SIFT</button>
+                            <button type="button" class="subtle-btn" id="module4-part2-reset" disabled>Reset inputs</button>
+                        </div>
+                        <div class="status-line" id="module4-part2-status" data-variant="info">Upload the portrait set to unlock the custom pipeline.</div>
+                    </form>
+                    <div class="module4-results">
+                        <div class="result-frame">
+                            <h4>Panorama Preview</h4>
+                            <div class="result-image" data-empty="true">
+                                <img id="module4-part2-output" alt="Module 4 Part 2 panorama preview" hidden>
+                                <p id="module4-part2-placeholder">No panorama generated yet.</p>
+                            </div>
+                            <dl class="module4-meta">
+                                <div>
+                                    <dt>Input count</dt>
+                                    <dd id="module4-part2-count">0</dd>
+                                </div>
+                                <div>
+                                    <dt>Output size</dt>
+                                    <dd id="module4-part2-size">-- × --</dd>
+                                </div>
+                            </dl>
+                            <button type="button" class="subtle-btn module4-download-btn" id="module4-part2-download" hidden>Download panorama</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Watch the video (collapsed by default) -->
+            <section class="video-section" aria-labelledby="video-toggle-a4">
+                <button id="video-toggle-a4" class="video-toggle" aria-expanded="false" aria-controls="video-panel-a4">Watch the video ▾</button>
+                <div id="video-panel-a4" class="video-panel">
+                    <div class="video-container" id="video-container-a4">
+                        <!-- Embedded Google Drive video for Module 4 -->
+                        <iframe title="Module 4 Tutorial Video"
+                                src="https://drive.google.com/file/d/1_KbjV3zwJuxD38XLn6o7rB85p4yDoVHt/preview"
+                                allow="autoplay; encrypted-media; fullscreen"
+                                allowfullscreen
+                                loading="lazy"
+                                referrerpolicy="no-referrer"
+                                style="border:0; width:100%; aspect-ratio:16/9;">
+                        </iframe>
+                    </div>
+                    <p class="video-fallback">If the embedded player does not load, <a href="https://drive.google.com/file/d/1_KbjV3zwJuxD38XLn6o7rB85p4yDoVHt/view?usp=sharing" target="_blank" rel="noopener noreferrer">open the video on Google Drive</a>.</p>
+                </div>
+            </section>
+            <!-- Source code explorer (collapsed by default) -->
+            <section class="source-section" aria-labelledby="source-toggle-a4">
+                <button id="source-toggle-a4" class="source-toggle" aria-expanded="false" aria-controls="source-panel-a4">View CLI source code ▾</button>
+                <div id="source-panel-a4" class="source-panel">
+                    <div class="source-files" role="list">
+                        <button class="source-file" role="listitem" data-module="a4" data-filename="module4_part1.py" data-source-path="module4_part1.py">module4_part1.py</button>
+                        <button class="source-file" role="listitem" data-module="a4" data-filename="module4_part2.py" data-source-path="module4_part2.py">module4_part2.py</button>
+                    </div>
+                    <div class="source-toolbar" aria-hidden="true" hidden>
+                        <a class="source-button view-raw-btn" target="_blank" rel="noopener noreferrer" aria-disabled="true">View raw</a>
+                        <a class="source-button download-btn" rel="noopener" aria-disabled="true" download>Download</a>
+                    </div>
+                    <pre class="source-code" id="source-code-a4"><code></code></pre>
+                </div>
+            </section>
+        </div>
+
+        <!-- MODULE 5 & 6 -->
+        <div id="a56" class="tab-content">
+            <h2>Module 5 &amp; 6 Assignment</h2>
+            <p class="description">Real-Time Object Tracker</p>
+            <section class="instructions-section" aria-labelledby="instructions-toggle-a56">
+                <button id="instructions-toggle-a56" class="instructions-toggle" aria-expanded="false" aria-controls="instructions-panel-a56">View module instructions ▾</button>
+                <div id="instructions-panel-a56" class="instructions-panel" aria-hidden="true">
+                    <div class="instructions-panel__body">
+                        <object data="{{ url_for('module_instructions', module_id='a56') }}" type="application/pdf" aria-label="Modules 5 and 6 assignment instructions" class="instructions-panel__viewer">
+                            <p>Your browser cannot display PDFs inline. <a href="{{ url_for('module_instructions', module_id='a56') }}" target="_blank" rel="noopener">Download Assignment 5 &amp; 6</a>.</p>
+                        </object>
+                    </div>
+                    <p class="instructions-panel__note">
+                        <a href="{{ url_for('module_instructions', module_id='a56') }}" target="_blank" rel="noopener">Open the Module 5 &amp; 6 instructions in a new tab</a>
+                    </p>
+                </div>
+            </section>
+            <section class="module2-card module56-written-card" id="module5-6-part1" aria-labelledby="module5-6-part1-title">
+                <header class="module2-card__header">
+                    <div>
+                        <h3 id="module5-6-part1-title">Part 1 - Written Response</h3>
+                        <p>Review the submitted answer corresponding to Assignments 5 &amp; 6, Question 1.</p>
+                    </div>
+                </header>
+                <div class="module2-card__body">
+                    <div class="module56-written-panel">
+                        <h4 class="module56-written-panel__label">Written answer for Assignments 5&amp;6 Question 1</h4>
+                        <object data="{{ url_for('written_answer', module_id='a56', question_id='q1') }}"
+                                type="application/pdf"
+                                aria-label="Written answer for Assignments 5 &amp; 6 Question 1"
+                                class="module56-written-panel__viewer">
+                            <p>Your browser cannot display PDFs inline. <a href="{{ url_for('written_answer', module_id='a56', question_id='q1') }}" target="_blank" rel="noopener">Download the written answer</a>.</p>
+                        </object>
+                        <p class="module56-written-panel__note">
+                            <a href="{{ url_for('written_answer', module_id='a56', question_id='q1') }}" target="_blank" rel="noopener">Open this response in a new tab</a> if the embedded viewer does not load.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section class="module2-card" id="module5-6-part2" aria-labelledby="module5-6-part2-title">
+                <header class="module2-card__header">
+                    <div>
+                        <h3 id="module5-6-part2-title">Part 2 - ArUco Marker Tracker</h3>
+                        <p>Upload a video (MP4, AVI, MOV) containing an object that has an ArUco marker and moves around. The tracker draws a box around detected markers and writes an annotated video back to you.</p>
+                        <p class="hint" style="margin-top:0.25rem">Please ensure the video contains visible ArUco markers on moving objects; otherwise the tracker may not find anything.</p>
+                    </div>
+                </header>
+                <div class="module2-card__body">
+                    <div class="module2-part1-grid">
+                        <form id="module5-6-part2-form" class="module5-6-part2-form" aria-label="Module 5 & 6 Part 2 form" enctype="multipart/form-data">
+                            <div class="field">
+                                <label class="file-input">
+                                    <input type="file" id="module5-6-part2-video-input" accept="video/*">
+                                    <span>Select a video file</span>
+                                </label>
+                                <div style="display:flex; gap:0.5rem; align-items:center; margin-top:0.25rem;">
+                                    <input type="checkbox" id="module5-6-part2-use-sample"> 
+                                    <label for="module5-6-part2-use-sample" style="margin-bottom:0;">Use example sample video</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="module5-6-part2-dict">Aruco dictionary</label>
+                                <select id="module5-6-part2-dict">
+                                    <option value="auto" selected>Auto detect</option>
+                                    <option value="4x4_50">4x4_50</option>
+                                    <option value="5x5_100">5x5_100</option>
+                                    <option value="6x6_250">6x6_250</option>
+                                    <option value="original">Original</option>
+                                    <option value="april_36h11">AprilTag (36h11)</option>
+                                </select>
+                                <p class="hint">Choose a predefined ArUco dictionary or let the tracker auto-detect.</p>
+                            </div>
+                            <div class="field">
+                                <label for="module5-6-part2-padding">Bounding box padding multiplier</label>
+                                <input type="number" id="module5-6-part2-padding" name="padding" min="0.5" max="5" step="0.1" value="1.0">
+                                <p class="hint">A factor to enlarge (or shrink) the tracked bounding box around the marker. 1.0 is no padding.</p>
+                            </div>
+                            <div class="module2-actions">
+                                <button type="submit" class="primary-btn" id="module5-6-part2-run-btn" disabled>Upload &amp; Run Tracker</button>
+                                <button type="button" class="subtle-btn" id="module5-6-part2-reset-btn" disabled>Reset</button>
+                            </div>
+                            <div class="status-line" id="module5-6-part2-status" data-variant="info">Choose a video to get started. For best results record a close-up moving object with an ArUco marker.</div>
+                        </form>
+                        <div class="module2-part1-visuals">
+                            <div class="result-frame">
+                                <h4>Input Video</h4>
+                                <div class="result-image" data-empty="true">
+                                    <video id="module5-6-part2-input-video" controls hidden muted playsinline preload="metadata"></video>
+                                    <p id="module5-6-part2-input-placeholder">No video selected.</p>
+                                </div>
+                            </div>
+                            <div class="result-frame">
+                                <h4>Processed Output</h4>
+                                <div class="result-image" data-empty="true">
+                                    <video id="module5-6-part2-output-video" controls hidden playsinline preload="metadata"></video>
+                                    <p id="module5-6-part2-output-placeholder">No processed output yet.</p>
+                                </div>
+                                <div class="hint" id="module5-6-part2-download-area" style="margin-top:0.75rem; display:none;">
+                                    <a id="module5-6-part2-download-link" href="#" download="processed.mp4">Download processed video</a>
+                                    <span style="margin-left:0.75rem; color:var(--muted);">If playback fails, try downloading and playing locally.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="module2-card" id="module5-6-part3" aria-labelledby="module5-6-part3-title">
+                <header class="module2-card__header">
+                    <div>
+                        <h3 id="module5-6-part3-title">Part 3 - Markerless Tracker Showcase</h3>
+                        <p>Visualize SAM2 (ViT-H) segmentation output by replaying original iPhone tracking video, alongside the bounding box overlay derived from the exported NPZ file.</p>
+                        <p class="hint" style="margin-top:0.25rem">Note: This is a view-only demo. Segmentation was run offline, and the website streams the fixed video/mask pair so you can view each detection.</p>
+                    </div>
+                </header>
+                <div class="module2-card__body module56-part2-body">
+                    <div class="module56-part2-overview">
+                        <p>The SAM2 tracker was executed on an RTX 4090 using the ViT-H SAM2 model. The resulting bounding array dimensions are bundled in <code>iphone-moving-masks.npz</code>; each frame is converted to a bounding box in Flask and animated client-side.</p>
+                        <ul class="module56-part2-metrics">
+                            <li>
+                                <span class="metric-label">Frames (mask/video)</span>
+                                <span class="metric-value" id="module5-6-part3-metric-frames">-- / --</span>
+                            </li>
+                            <li>
+                                <span class="metric-label">Resolution</span>
+                                <span class="metric-value" id="module5-6-part3-metric-resolution">-- × --</span>
+                            </li>
+                            <li>
+                                <span class="metric-label">Frame rate</span>
+                                <span class="metric-value" id="module5-6-part3-metric-fps">-- fps</span>
+                            </li>
+                            <li>
+                                <span class="metric-label">Duration</span>
+                                <span class="metric-value" id="module5-6-part3-metric-duration">-- s</span>
+                            </li>
+                        </ul>
+                        <div class="module56-part2-actions">
+                            <button type="button" class="subtle-btn" id="module5-6-part3-reload">Reload assets</button>
+                            <span class="module56-part2-note" id="module5-6-part3-mask-note">Masks: <code>iphone-moving-masks.npz</code></span>
+                        </div>
+                        <div class="status-line" id="module5-6-part3-status" data-variant="info">Preparing SAM2 overlay assets…</div>
+                    </div>
+                    <div class="module56-part2-visuals">
+                        <div class="result-frame">
+                            <h4>Original Capture</h4>
+                            <div class="result-image result-image--video" data-empty="true">
+                                <video id="module5-6-part3-original-video" controls playsinline preload="metadata" hidden muted></video>
+                                <p id="module5-6-part3-original-placeholder">Loading video…</p>
+                            </div>
+                        </div>
+                        <div class="result-frame">
+                            <h4>SAM2 Overlay Playback</h4>
+                            <div class="overlay-player" id="module5-6-part3-overlay-player">
+                                <video id="module5-6-part3-overlay-video" controls playsinline preload="metadata"></video>
+                                <canvas id="module5-6-part3-overlay-canvas" aria-hidden="true"></canvas>
+                                <div class="overlay-player__hint" id="module5-6-part3-overlay-hint">Loading overlay…</div>
+                            </div>
+                            <div class="overlay-readout">
+                                <span>Frame <strong id="module5-6-part3-frame">--</strong></span>
+                                <span>Box <strong id="module5-6-part3-box">--</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Watch the video (collapsed by default) -->
+            <section class="video-section" aria-labelledby="video-toggle-a56">
+                <button id="video-toggle-a56" class="video-toggle" aria-expanded="false" aria-controls="video-panel-a56">Watch the video ▾</button>
+                <div id="video-panel-a56" class="video-panel">
+                    <div class="video-container" id="video-container-a56">
+                        <!-- Embedded Google Drive video for Module 5 (Part of Module 5 & 6) -->
+                        <iframe title="Module 5 Tutorial Video"
+                                src="https://drive.google.com/file/d/1dPKZiP7AJ6w2yoTdKaBeEbvROelwst37/preview"
+                                allow="autoplay; encrypted-media; fullscreen"
+                                allowfullscreen
+                                loading="lazy"
+                                referrerpolicy="no-referrer"
+                                style="border:0; width:100%; aspect-ratio:16/9;">
+                        </iframe>
+                    </div>
+                    <p class="video-fallback">If the embedded player does not load, <a href="https://drive.google.com/file/d/1dPKZiP7AJ6w2yoTdKaBeEbvROelwst37/view?usp=sharing" target="_blank" rel="noopener noreferrer">open the video on Google Drive</a>.</p>
+                </div>
+            </section>
+            <!-- Source code explorer (collapsed by default) -->
+            <section class="source-section" aria-labelledby="source-toggle-a56">
+                <button id="source-toggle-a56" class="source-toggle" aria-expanded="false" aria-controls="source-panel-a56">View CLI source code ▾</button>
+                <div id="source-panel-a56" class="source-panel">
+                    <div class="source-files" role="list">
+                        <button class="source-file" role="listitem" data-module="a56" data-filename="module5_6_part1.py" data-source-path="module5_6_part1.py">module5_6_part1.py</button>
+                        <button class="source-file" role="listitem" data-module="a56" data-filename="module5_6_part2.py" data-source-path="module5_6_part2.py">module5_6_part2.py</button>
+                    </div>
+                    <div class="source-toolbar" aria-hidden="true" hidden>
+                        <a class="source-button view-raw-btn" target="_blank" rel="noopener noreferrer" aria-disabled="true">View raw</a>
+                        <a class="source-button download-btn" rel="noopener" aria-disabled="true" download>Download</a>
+                    </div>
+                    <pre class="source-code" id="source-code-a56"><code></code></pre>
+                </div>
+            </section>
+        </div>
+
+        <!-- MODULE 7 -->
+        <div id="a7" class="tab-content">
+            <h2>Module 7 Assignment</h2>
+            <p class="description">Object Dimension Calculator using Calibrated Stereo; Pose Estimation &amp; Hand Tracking</p>
+            <section class="instructions-section" aria-labelledby="instructions-toggle-a7">
+                <button id="instructions-toggle-a7" class="instructions-toggle" aria-expanded="false" aria-controls="instructions-panel-a7">View module instructions ▾</button>
+                <div id="instructions-panel-a7" class="instructions-panel" aria-hidden="true">
+                    <div class="instructions-panel__body">
+                        <object data="{{ url_for('module_instructions', module_id='a7') }}" type="application/pdf" aria-label="Module 7 assignment instructions" class="instructions-panel__viewer">
+                            <p>Your browser cannot display PDFs inline. <a href="{{ url_for('module_instructions', module_id='a7') }}" target="_blank" rel="noopener">Download Assignment 7</a>.</p>
+                        </object>
+                    </div>
+                    <p class="instructions-panel__note">
+                        <a href="{{ url_for('module_instructions', module_id='a7') }}" target="_blank" rel="noopener">Open the Module 7 instructions in a new tab</a>
+                    </p>
+                </div>
+            </section>
+            <section class="module7-card" id="module7-part1" aria-labelledby="module7-part1-title">
+                <header class="module7-card__header">
+                    <div>
+                        <h3 id="module7-part1-title">Part 1 - Calibrated Stereo Depth &amp; Measurements</h3>
+                        <p>Follow the exact CLI workflow inside the browser: calibrate with a reference image, triangulate depth from a stereo pair, then measure arbitrary segments.</p>
+                    </div>
+                    <button type="button" class="subtle-btn" id="module7-example-btn">Use example images</button>
+                </header>
+                <div class="module7-card__body module7-part1-body">
+                    <div class="module7-alert" role="status">
+                        ⚠️ All three images (reference, left, right) <strong>must be captured by the same camera.</strong> Mixing devices will break the calibration model.
+                    </div>
+
+                    <article class="m7-step-card" id="module7-calibration-card">
+                        <header class="m7-step-header">
+                            <span class="step-pill">Step 1</span>
+                            <div>
+                                <h4>Calibrate with a reference image</h4>
+                                <p>Upload the reference frame, click two points across a known width, and enter the real-world measurements (centimeters only) to recover the focal length.</p>
+                            </div>
+                        </header>
+                        <div class="m7-step-body">
+                            <div class="m7-file-row">
+                                <label class="file-input">
+                                    <input type="file" accept="image/*" id="module7-ref-input">
+                                    <span>Choose reference image</span>
+                                </label>
+                                <button type="button" class="subtle-btn" id="module7-ref-clear" disabled>Clear image</button>
+                            </div>
+                            <div class="canvas-wrapper" data-state="empty">
+                                <canvas id="module7-ref-canvas" class="measure-canvas" role="img" aria-label="Module 7 reference image"></canvas>
+                                <div class="canvas-empty" id="module7-ref-empty">Upload the reference image, then click the LEFT and RIGHT edges of the known object.</div>
+                            </div>
+                            <div class="point-controls">
+                                <div>
+                                    <span class="metric-label">Pixel width</span>
+                                    <span class="metric-value" id="module7-ref-px">--</span>
+                                </div>
+                                <button type="button" class="subtle-btn" id="module7-ref-reset" disabled>Reset points</button>
+                            </div>
+                            <div class="field-grid">
+                                <label class="field">
+                                    <span>Real width (cm)</span>
+                                    <input type="number" id="module7-ref-real-width" min="0" step="0.01" placeholder="e.g. 15">
+                                </label>
+                                <label class="field">
+                                    <span>Camera distance (cm)</span>
+                                    <input type="number" id="module7-ref-distance" min="0" step="0.1" placeholder="e.g. 33">
+                                </label>
+                            </div>
+                            <button type="button" class="primary-btn" id="module7-ref-calc" disabled>Store focal length</button>
+                            <div class="status-line" id="module7-ref-status">Upload the reference image to begin calibration.</div>
+                        </div>
+                    </article>
+
+                    <article class="m7-step-card locked" id="module7-stereo-card" aria-disabled="true">
+                        <header class="m7-step-header">
+                            <span class="step-pill">Step 2</span>
+                            <div>
+                                <h4>Recover Z distance from a stereo pair</h4>
+                                <p>Load the left/right frames captured by the same camera, click a matching point in each, and enter the baseline (camera translation) in cm.</p>
+                            </div>
+                        </header>
+                        <div class="m7-step-body">
+                            <div class="m7-file-row">
+                                <div class="m7-file-column">
+                                    <label class="file-input">
+                                        <input type="file" accept="image/*" id="module7-left-input" disabled>
+                                        <span>Choose LEFT image</span>
+                                    </label>
+                                    <button type="button" class="subtle-btn" id="module7-left-clear" disabled>Clear left</button>
+                                </div>
+                                <div class="m7-file-column">
+                                    <label class="file-input">
+                                        <input type="file" accept="image/*" id="module7-right-input" disabled>
+                                        <span>Choose RIGHT image</span>
+                                    </label>
+                                    <button type="button" class="subtle-btn" id="module7-right-clear" disabled>Clear right</button>
+                                </div>
+                            </div>
+                            <div class="m7-dual-canvas">
+                                <div class="canvas-wrapper" data-state="empty">
+                                    <canvas id="module7-left-canvas" class="measure-canvas" role="img" aria-label="Module 7 left image"></canvas>
+                                    <div class="canvas-empty" id="module7-left-empty">After calibration, load the LEFT stereo frame and click a target point.</div>
+                                </div>
+                                <div class="canvas-wrapper" data-state="empty">
+                                    <canvas id="module7-right-canvas" class="measure-canvas" role="img" aria-label="Module 7 right image"></canvas>
+                                    <div class="canvas-empty" id="module7-right-empty">Load the RIGHT frame, then click the same point you chose in the left image.</div>
+                                </div>
+                            </div>
+                            <div class="m7-disparity-grid">
+                                <div>
+                                    <span class="metric-label">Left click (px)</span>
+                                    <span class="metric-value" id="module7-left-point">--</span>
+                                </div>
+                                <div>
+                                    <span class="metric-label">Right click (px)</span>
+                                    <span class="metric-value" id="module7-right-point">--</span>
+                                </div>
+                                <div>
+                                    <span class="metric-label">Disparity</span>
+                                    <span class="metric-value" id="module7-disparity">--</span>
+                                </div>
+                            </div>
+                            <div class="field-grid single">
+                                <label class="field">
+                                    <span>Baseline (cm)</span>
+                                    <input type="number" id="module7-baseline" min="0" step="0.01" placeholder="e.g. 3.8" disabled>
+                                </label>
+                            </div>
+                            <button type="button" class="primary-btn" id="module7-depth-btn" disabled>Calculate depth</button>
+                            <div class="status-line" id="module7-stereo-status">Finish Step 1 to unlock the stereo depth tools.</div>
+                        </div>
+                    </article>
+
+                    <article class="m7-step-card locked" id="module7-measure-card" aria-disabled="true">
+                        <header class="m7-step-header">
+                            <span class="step-pill">Step 3</span>
+                            <div>
+                                <h4>Measure arbitrary segments</h4>
+                                <p>Using the stored focal length and Z distance, click any number of point pairs on the LEFT image to derive their real-world length.</p>
+                            </div>
+                        </header>
+                        <div class="m7-step-body">
+                            <div class="m7-measure-layout">
+                                <div class="canvas-wrapper" data-state="empty">
+                                    <canvas id="module7-measure-canvas" class="measure-canvas" role="img" aria-label="Module 7 measurement canvas"></canvas>
+                                    <div class="canvas-empty" id="module7-measure-empty">Once a stereo depth is computed, the LEFT frame will appear here for measurement.</div>
+                                </div>
+                                <div class="m7-measure-panel">
+                                    <div class="m7-summary-grid">
+                                        <div>
+                                            <span class="metric-label">Focal length (px)</span>
+                                            <span class="metric-value" id="module7-summary-focal">--</span>
+                                        </div>
+                                        <div>
+                                            <span class="metric-label">Depth Z (cm)</span>
+                                            <span class="metric-value" id="module7-summary-depth">--</span>
+                                        </div>
+                                        <div>
+                                            <span class="metric-label">Disparity (px)</span>
+                                            <span class="metric-value" id="module7-summary-disparity">--</span>
+                                        </div>
+                                        <div>
+                                            <span class="metric-label">Baseline (cm)</span>
+                                            <span class="metric-value" id="module7-summary-baseline">--</span>
+                                        </div>
+                                    </div>
+                                    <div class="m7-measure-actions">
+                                        <p>Click points A and B on the image to log a measurement. Repeat for as many segments as you want.</p>
+                                        <button type="button" class="subtle-btn" id="module7-measure-reset" disabled>Clear measurements</button>
+                                    </div>
+                                    <div class="m7-measure-results" aria-live="polite">
+                                        <h5>Measurements</h5>
+                                        <ol id="module7-measurements-list">
+                                            <li class="placeholder">No measurements yet.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="status-line" id="module7-measure-status">Calculate stereo depth to unlock the measurement canvas.</div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="module7-card module7-written-card" id="module7-part2" aria-labelledby="module7-part2-title">
+                <header class="module7-card__header">
+                    <div>
+                        <h3 id="module7-part2-title">Part 2 - Written Response</h3>
+                        <p>Review the submitted answer corresponding to Assignment 7, Question 2.</p>
+                    </div>
+                </header>
+                <div class="module7-card__body module7-written-body">
+                    <div class="written-answer-panel">
+                        <h4 class="written-answer-panel__label">Written Answer for Assignment 7, Question 2</h4>
+                        <object data="{{ url_for('written_answer', module_id='a7', question_id='q2') }}"
+                                type="application/pdf"
+                                aria-label="Written Answer for Assignment 7, Question 2"
+                                class="written-answer-panel__viewer">
+                            <p>Your browser cannot display PDFs inline. <a href="{{ url_for('written_answer', module_id='a7', question_id='q2') }}" target="_blank" rel="noopener">Download the written answer</a>.</p>
+                        </object>
+                        <p class="written-answer-panel__note">
+                            <a href="{{ url_for('written_answer', module_id='a7', question_id='q2') }}" target="_blank" rel="noopener">Open this response in a new tab</a> if the embedded viewer does not load.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="module7-card" id="module7-part3" aria-labelledby="module7-part3-title">
+                <header class="module7-card__header">
+                    <div>
+                        <h3 id="module7-part3-title">Part 3 - Pose &amp; Hand Tracking</h3>
+                        <p>Upload a short clip to extract MediaPipe pose &amp; hand landmarks, export them as CSV, and watch the annotated video.</p>
+                    </div>
+                </header>
+                <div class="module7-card__body module7-grid">
+                    <form id="module7-part3-form" aria-label="Module 7 Part 3 form" enctype="multipart/form-data">
+                        <div class="field">
+                            <label class="file-input">
+                                <input type="file" id="module7-video-input" accept="video/*">
+                                <span>Select a video file</span>
+                            </label>
+                            <div class="module7-sample-toggle">
+                                <input type="checkbox" id="module7-use-sample">
+                                <label for="module7-use-sample">Use sample pose video</label>
+                            </div>
+                        </div>
+                        <p class="hint">Supported formats: MP4, AVI, MOV, MKV, WEBM. Short clips (≤30 seconds) keep processing fast.</p>
+                        <div class="module7-actions">
+                            <button type="submit" class="primary-btn" id="module7-run-btn" disabled>Upload &amp; Run Tracker</button>
+                            <button type="button" class="subtle-btn" id="module7-reset-btn" disabled>Reset</button>
+                        </div>
+                        <div class="status-line" id="module7-part3-status" data-variant="info">Choose a video or enable the sample clip to get started.</div>
+                    </form>
+                    <div class="module7-output" aria-live="polite">
+                        <div class="module7-video-grid">
+                            <div class="result-frame">
+                                <h4>Original Video</h4>
+                                <div class="result-image result-image--video" data-empty="true">
+                                    <video id="module7-original-video" controls playsinline preload="metadata" hidden muted></video>
+                                    <p id="module7-original-placeholder">No video selected.</p>
+                                </div>
+                            </div>
+                            <div class="result-frame">
+                                <h4>Annotated Output</h4>
+                                <div class="result-image result-image--video" data-empty="true">
+                                    <video id="module7-annotated-video" controls playsinline preload="metadata" hidden muted></video>
+                                    <p id="module7-annotated-placeholder">No annotated output yet.</p>
+                                </div>
+                                <div class="module7-downloads" id="module7-download-area" hidden>
+                                    <a id="module7-annotated-download" class="subtle-btn" href="#" download>Download annotated video</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module7-summary" id="module7-summary">
+                            <div>
+                                <span class="metric-label">Frames processed</span>
+                                <span class="metric-value" id="module7-metric-frames">--</span>
+                            </div>
+                            <div>
+                                <span class="metric-label">Duration (s)</span>
+                                <span class="metric-value" id="module7-metric-duration">--</span>
+                            </div>
+                            <div>
+                                <span class="metric-label">Frame rate</span>
+                                <span class="metric-value" id="module7-metric-fps">--</span>
+                            </div>
+                            <div>
+                                <span class="metric-label">Resolution</span>
+                                <span class="metric-value" id="module7-metric-size">-- × --</span>
+                            </div>
+                            <div>
+                                <span class="metric-label">CSV rows</span>
+                                <span class="metric-value" id="module7-metric-csv">--</span>
+                            </div>
+                        </div>
+                        <div class="module7-csv-panel">
+                            <div class="module7-csv-header">
+                                <h4>Landmark CSV Preview</h4>
+                                <a id="module7-csv-download" class="subtle-btn" href="#" download hidden>Download CSV</a>
+                            </div>
+                            <div class="module7-csv-table-wrapper" id="module7-csv-wrapper" data-empty="true">
+                                <table>
+                                    <thead id="module7-csv-head"></thead>
+                                    <tbody id="module7-csv-body"></tbody>
+                                </table>
+                                <p id="module7-csv-placeholder">Run the pose tracker to inspect the first few rows.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Watch the video (collapsed by default) -->
+            <section class="video-section" aria-labelledby="video-toggle-a7">
+                <button id="video-toggle-a7" class="video-toggle" aria-expanded="false" aria-controls="video-panel-a7">Watch the video ▾</button>
+                <div id="video-panel-a7" class="video-panel">
+                    <div class="video-container" id="video-container-a7">
+                        <!-- Embedded Google Drive video for Module 7 -->
+                        <iframe title="Module 7 Tutorial Video"
+                                src="https://drive.google.com/file/d/1wIUwlsvWRAuGgAItazKM1TMy1a-A-xcY/preview"
+                                allow="autoplay; encrypted-media; fullscreen"
+                                allowfullscreen
+                                loading="lazy"
+                                referrerpolicy="no-referrer"
+                                style="border:0; width:100%; aspect-ratio:16/9;">
+                        </iframe>
+                    </div>
+                    <p class="video-fallback">If the embedded player does not load, <a href="https://drive.google.com/file/d/1wIUwlsvWRAuGgAItazKM1TMy1a-A-xcY/view?usp=sharing" target="_blank" rel="noopener noreferrer">open the video on Google Drive</a>.</p>
+                </div>
+            </section>
+            <!-- Source code explorer (collapsed by default) -->
+            <section class="source-section" aria-labelledby="source-toggle-a7">
+                <button id="source-toggle-a7" class="source-toggle" aria-expanded="false" aria-controls="source-panel-a7">View CLI source code ▾</button>
+                <div id="source-panel-a7" class="source-panel">
+                    <div class="source-files" role="list">
+                        <button class="source-file" role="listitem" data-module="a7" data-filename="module7_part1.py" data-source-path="module7_part1.py">module7_part1.py</button>
+                        <button class="source-file" role="listitem" data-module="a7" data-filename="module7_part2.py" data-source-path="module7_part2.py">module7_part2.py</button>
+                    </div>
+                    <div class="source-toolbar" aria-hidden="true" hidden>
+                        <a class="source-button view-raw-btn" target="_blank" rel="noopener noreferrer" aria-disabled="true">View raw</a>
+                        <a class="source-button download-btn" rel="noopener" aria-disabled="true" download>Download</a>
+                    </div>
+                    <pre class="source-code" id="source-code-a7"><code></code></pre>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>/* lightweight init for highlight.js */ try { if (window.hljs && hljs.highlightAll) hljs.highlightAll(); } catch(e) { /* ignore */ }</script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
