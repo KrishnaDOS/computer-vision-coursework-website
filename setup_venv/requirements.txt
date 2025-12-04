@@ -1,0 +1,27 @@
+# core web app
+Flask
+flask-cors
+
+# image/video processing
+numpy
+opencv-contrib-python-headless  # or opencv-contrib-python for GUI/dev
+
+# plotting
+matplotlib
+pillow
+
+# ML/vision
+mediapipe
+segment-anything
+torch
+torchvision
+sam2
+# jax + jaxlib are optional for SAM2 model usage:
+# jax>=0.7.1
+# jaxlib>=0.7.1
+
+# development
+pytest
+
+# production server
+gunicorn
