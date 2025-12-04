@@ -6,8 +6,8 @@ Default VenvDir is ./.venv
 
 Notes:
 - To have the activation persist in your current session, dot-source this script:
-  `. .\setup_venv.ps1` or run with an execution-policy bypass:
-  `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force; . .\setup_venv.ps1`
+  . .\setup_venv.ps1 or run with an execution-policy bypass:
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force; . .\setup_venv.ps1
 #>
 
 [CmdletBinding()]
@@ -99,10 +99,12 @@ if (-not $NoActivate.IsPresent) {
             . $Activate
             Write-Host "Activated virtualenv at $VenvDir"
         } else {
-            Write-Warning "Cannot find activation script. You can activate manually later: `. $VenvDir\Scripts\Activate.ps1`"
+            # FIXED: Removed backticks in string below
+            Write-Warning "Cannot find activation script. You can activate manually later: . $VenvDir\Scripts\Activate.ps1"
         }
     } catch {
-        Write-Warning "Failed to activate automatically. To activate manually run: `. $VenvDir\Scripts\Activate.ps1`"
+        # FIXED: Removed backticks in string below
+        Write-Warning "Failed to activate automatically. To activate manually run: . $VenvDir\Scripts\Activate.ps1"
     }
 }
 
@@ -110,8 +112,7 @@ Write-Host "Upgrading pip and setuptools..."
 & (Join-Path $VenvDir 'Scripts\python.exe') -m pip install --upgrade pip setuptools wheel
 
 # Prefer a requirements.txt located next to this script, fall back to the
-# current working directory. This avoids failures when the script is executed
-# from the repo root but the requirements live in the script folder.
+# current working directory.
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $ReqInScript = Join-Path $ScriptDir 'requirements.txt'
 $ReqInCwd = Join-Path (Get-Location) 'requirements.txt'
@@ -128,5 +129,6 @@ if ($ReqFile) {
     Write-Host "Create a requirements.txt in the script or working directory to install packages automatically."
 }
 
-Write-Host "Done. To activate the venv run (PowerShell): `. $VenvDir\Scripts\Activate.ps1`"
+# FIXED: Removed backticks in string below
+Write-Host "Done. To activate the venv run (PowerShell): . $VenvDir\Scripts\Activate.ps1"
 Write-Host "Or (cmd.exe): $VenvDir\Scripts\activate.bat"
