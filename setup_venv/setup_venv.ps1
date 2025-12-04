@@ -2,12 +2,6 @@
 <#
 Creates and activates a Python virtual environment and installs dependencies.
 Usage: .\setup_venv.ps1 [-VenvDir <dir>] [-NoActivate] [-Recreate]
-Default VenvDir is ./.venv
-
-Notes:
-- To have the activation persist in your current session, dot-source this script:
-  . .\setup_venv.ps1 or run with an execution-policy bypass:
-  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force; . .\setup_venv.ps1
 #>
 
 [CmdletBinding()]
@@ -29,106 +23,109 @@ function Write-ErrAndExit($msg, $code=1) {
     exit $code
 }
 
+# --- STEP 1: PRE-CHECKS ---
+Write-Host "--- Step 1: Initialization ---"
 $Python = $env:PYTHON; if (-not $Python) { $Python = 'python' }
-Write-Host "Using Python interpreter: $Python"
+Write-Host "Using System Python interpreter: $Python"
 
 if (-not (Get-Command $Python -ErrorAction SilentlyContinue)) {
-    Write-ErrAndExit "Error: $Python not found in PATH. Install Python 3 or set PYTHON env var to a valid interpreter." 2
+    Write-ErrAndExit "Error: $Python not found in PATH." 2
 }
 
-# Detect other common virtualenv names to consider for deletion/recreation
+# --- STEP 2: CLEANUP ---
+Write-Host "--- Step 2: Checking existing venvs ---"
 $ExtraVenvs = @()
 if ($VenvDir -ne '.venv' -and (Test-Path '.venv')) { $ExtraVenvs += '.venv' }
 if ($VenvDir -ne 'venv' -and (Test-Path 'venv')) { $ExtraVenvs += 'venv' }
 
 if ((Test-Path $VenvDir) -or ($ExtraVenvs.Count -gt 0)) {
-    Write-Host "Found existing virtualenv(s):"
-    if (Test-Path $VenvDir) { Write-Host "  - $VenvDir" }
-    foreach ($ev in $ExtraVenvs) { Write-Host "  - $ev" }
-
     if ($Recreate.IsPresent) { $Confirm = $true } else {
-        $resp = Read-Host "Remove the existing virtualenv(s) above and recreate? [y/N]"
-        if ($resp -match '^(?i:y|yes)$') { $Confirm = $true } else { $Confirm = $false }
+        # Defaulting to False here to speed up re-runs, change to prompt if needed
+        $Confirm = $false 
+        Write-Host "Existing venv found. Reusing it (use -Recreate to force delete)."
     }
 
     if ($Confirm) {
-        if ($env:VIRTUAL_ENV) {
-            Write-Host "Active virtualenv detected at ${env:VIRTUAL_ENV}. Attempting to deactivate..."
-            if (Get-Command deactivate -ErrorAction SilentlyContinue) {
-                try { deactivate } catch { }
-            } else {
-                Write-Warning "'deactivate' function not available in this session. Proceeding to remove folders anyway."
-            }
-        }
-
-        if (Test-Path $VenvDir) {
-            Write-Host "Removing $VenvDir"
-            Remove-Item -Recurse -Force -LiteralPath $VenvDir
-        }
-        foreach ($ev in $ExtraVenvs) {
-            if (Test-Path $ev) {
-                Write-Host "Removing $ev"
-                Remove-Item -Recurse -Force -LiteralPath $ev
-            }
-        }
-    } else {
-        Write-Host "Keeping existing virtualenv(s); will reuse $VenvDir if present."
+        Write-Host "Removing old environments..."
+        if (Test-Path $VenvDir) { Remove-Item -Recurse -Force -LiteralPath $VenvDir }
+        foreach ($ev in $ExtraVenvs) { if (Test-Path $ev) { Remove-Item -Recurse -Force -LiteralPath $ev } }
     }
 }
 
+# --- STEP 3: CREATION ---
+Write-Host "--- Step 3: Creating Venv ---"
 if (-not (Test-Path $VenvDir)) {
     Write-Host "Creating virtual environment in $VenvDir..."
     try {
         & $Python -m venv $VenvDir
     } catch {
-        Write-ErrAndExit "Error: your Python interpreter failed to create the venv. Ensure the interpreter has venv/ensurepip available." 2
+        Write-ErrAndExit "Error: Failed to create venv." 2
     }
 } else {
-    Write-Host "Virtualenv already exists at $VenvDir — reusing it."
+    Write-Host "Virtualenv folder exists."
 }
 
-$Activate = Join-Path $VenvDir 'Scripts\Activate.ps1'
-if (-not (Test-Path $Activate)) {
-    Write-Warning "Activate script missing at $Activate"
-}
-
-if (-not $NoActivate.IsPresent) {
+# --- STEP 4: ACTIVATION ---
+Write-Host "--- Step 4: Activation ---"
+$ActivateScript = Join-Path $VenvDir 'Scripts\Activate.ps1'
+if (-not (Test-Path $ActivateScript)) {
+    Write-Warning "CRITICAL: Activate script not found at $ActivateScript"
+} elseif (-not $NoActivate.IsPresent) {
     try {
-        if (Test-Path $Activate) {
-            Write-Host "Attempting to activate virtualenv at $VenvDir"
-            . $Activate
-            Write-Host "Activated virtualenv at $VenvDir"
-        } else {
-            # FIXED: Removed backticks in string below
-            Write-Warning "Cannot find activation script. You can activate manually later: . $VenvDir\Scripts\Activate.ps1"
-        }
+        Write-Host "Activating: $ActivateScript"
+        . $ActivateScript
     } catch {
-        # FIXED: Removed backticks in string below
-        Write-Warning "Failed to activate automatically. To activate manually run: . $VenvDir\Scripts\Activate.ps1"
+        Write-Warning "Activation script failed to run."
     }
 }
 
-Write-Host "Upgrading pip and setuptools..."
-& (Join-Path $VenvDir 'Scripts\python.exe') -m pip install --upgrade pip setuptools wheel
+# --- STEP 5: PIP UPGRADE (Protected) ---
+Write-Host "--- Step 5: Upgrading Pip ---"
 
-# Prefer a requirements.txt located next to this script, fall back to the
-# current working directory.
-$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
+# Determine path to python executable inside venv
+$VenvPython = Join-Path $VenvDir 'Scripts\python.exe'
+
+if (-not (Test-Path $VenvPython)) {
+    Write-Error "CRITICAL: Venv Python executable not found at: $VenvPython"
+    Write-Host "Skipping Pip Upgrade..."
+} else {
+    try {
+        Write-Host "Running pip upgrade using: $VenvPython"
+        & $VenvPython -m pip install --upgrade pip setuptools wheel
+    } catch {
+        Write-Error "Pip upgrade failed. Continuing to requirements..."
+    }
+}
+
+# --- STEP 6: REQUIREMENTS ---
+Write-Host "--- Step 6: Requirements ---"
+
+# Logic to find where this script is running from
+$ScriptDir = $PSScriptRoot
+if (-not $ScriptDir) { $ScriptDir = Get-Location }
+
 $ReqInScript = Join-Path $ScriptDir 'requirements.txt'
 $ReqInCwd = Join-Path (Get-Location) 'requirements.txt'
 $ReqFile = $null
+
+Write-Host "Searching for requirements.txt..."
+Write-Host "  [?] Checked: $ReqInScript"
+Write-Host "  [?] Checked: $ReqInCwd"
 
 if (Test-Path $ReqInScript) { $ReqFile = $ReqInScript }
 elseif (Test-Path $ReqInCwd) { $ReqFile = $ReqInCwd }
 
 if ($ReqFile) {
-    Write-Host "Installing packages from $ReqFile"
-    & (Join-Path $VenvDir 'Scripts\pip.exe') install -r $ReqFile
+    Write-Host "SUCCESS: Found requirements file at: $ReqFile"
+    
+    if (Test-Path $VenvPython) {
+        Write-Host "Installing dependencies..."
+        & $VenvPython -m pip install -r $ReqFile
+    } else {
+        Write-Error "Cannot install packages: Python executable missing."
+    }
 } else {
-    Write-Host "No requirements file found — skipping package installation."
-    Write-Host "Create a requirements.txt in the script or working directory to install packages automatically."
+    Write-Warning "No requirements.txt found."
 }
 
-# FIXED: Removed backticks in string below
-Write-Host "Done. To activate the venv run (PowerShell): . $VenvDir\Scripts\Activate.ps1"
-Write-Host "Or (cmd.exe): $VenvDir\Scripts\activate.bat"
+Write-Host "--- Setup Complete ---"
